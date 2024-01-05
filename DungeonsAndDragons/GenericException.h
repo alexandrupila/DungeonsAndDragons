@@ -4,7 +4,7 @@
 class GenericException :
     public IException
 {
-private:
+protected:
     std::string exceptionText;
 public:
     GenericException(std::string aux = "unhandled exception");

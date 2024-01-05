@@ -13,3 +13,8 @@ std::istream& operator>>(std::istream& in, Rasa& race)
 	}
 	return in;
 }
+
+std::string Rasa::getName()
+{
+	return this->denumire_rasa;
+}

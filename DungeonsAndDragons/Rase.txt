@@ -1,4 +1,11 @@
 Elf
 2
-Shoot_Bow 5 7 Dexterity
-Cut 9 10 Dexterity
+Shadowstep 5 7 Dexterity
+Elven_Fury 9 10 Dexterity
+Human
+1
+Rallying_Cry 8 15 Strength
+Nightborne
+2
+Arcane_Pulse 12 18 Intelligence
+Chill_Of_Night 10 14 Intelligence

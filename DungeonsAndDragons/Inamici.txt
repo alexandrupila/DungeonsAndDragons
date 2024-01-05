@@ -1,0 +1,16 @@
+Xaylalla
+70
+Elf
+Ranger
+Strength 10
+Dexterity 25
+Intelligence 8
+Faith 7
+Zyraethis
+50
+Nightborne
+Warlock
+Strength 8
+Dexterity 6
+Intelligence 26
+Faith 10

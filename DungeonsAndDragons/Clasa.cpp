@@ -13,3 +13,8 @@ std::istream& operator>>(std::istream& in, Clasa& cl)
 	}
 	return in;
 }
+
+std::string Clasa::getName()
+{
+	return denumire_clasa;
+}

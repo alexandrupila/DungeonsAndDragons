@@ -1,0 +1,12 @@
+schimba
+portal 15 Intelligence
+The_Waking_Isles
+normal
+cufar 18 Strength 
+Ai spart cufarul iar in interiorul acestuia se afla o sabie magica.
+schimba
+usa 12 Dexterity
+Secret_Chamber
+normal
+statuie_grifon 25 Intelligence
+Statuia grifonului a simtit inteligenta ta si a decis sa iti ofere binecuvantarea sa in drumul greu ce te asteapta.

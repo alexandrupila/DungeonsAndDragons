@@ -1,5 +1,8 @@
 #pragma once
 #include <iostream>
+
+#define NR_OF_STATS 4
+
 class Abilitate
 {
 private:

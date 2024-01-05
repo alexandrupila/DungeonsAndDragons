@@ -33,6 +33,27 @@
     <ClCompile Include="GenericException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Personaj.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IObiect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Obiect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Room.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ObiectNormal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ObiectSchimbareScena.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenariu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clasa.h">
@@ -50,9 +71,42 @@
     <ClInclude Include="GenericException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Personaj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IObiect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Obiect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Room.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ObiectNormal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ObiectSchimbareScena.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenariu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Rase.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Clase.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Obiecte.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Camere.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Inamici.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

@@ -142,18 +142,36 @@
     <ClCompile Include="Abilitate.cpp" />
     <ClCompile Include="Clasa.cpp" />
     <ClCompile Include="DungeonsAndDragons.cpp" />
+    <ClCompile Include="Scenariu.cpp" />
     <ClCompile Include="GenericException.cpp" />
     <ClCompile Include="IException.cpp" />
+    <ClCompile Include="IObiect.cpp" />
+    <ClCompile Include="Obiect.cpp" />
+    <ClCompile Include="ObiectNormal.cpp" />
+    <ClCompile Include="ObiectSchimbareScena.cpp" />
+    <ClCompile Include="Personaj.cpp" />
     <ClCompile Include="Rasa.cpp" />
+    <ClCompile Include="Room.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Abilitate.h" />
     <ClInclude Include="Clasa.h" />
+    <ClInclude Include="Scenariu.h" />
     <ClInclude Include="GenericException.h" />
     <ClInclude Include="IException.h" />
+    <ClInclude Include="IObiect.h" />
+    <ClInclude Include="Obiect.h" />
+    <ClInclude Include="ObiectNormal.h" />
+    <ClInclude Include="ObiectSchimbareScena.h" />
+    <ClInclude Include="Personaj.h" />
     <ClInclude Include="Rasa.h" />
+    <ClInclude Include="Room.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Camere.txt" />
+    <Text Include="Clase.txt" />
+    <Text Include="Inamici.txt" />
+    <Text Include="Obiecte.txt" />
     <Text Include="Rase.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
