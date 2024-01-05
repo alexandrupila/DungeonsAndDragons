@@ -1,0 +1,4 @@
+Elf
+2
+Shoot_Bow 5 7 Dexterity
+Cut 9 10 Dexterity
