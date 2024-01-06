@@ -1,5 +1,5 @@
 Xaylalla
-70
+7
 Elf
 Ranger
 Strength 10

@@ -5,9 +5,9 @@ Divine_Intervention 20 27 Faith
 Righteous_Strike 6 10 Strength
 Warlock
 3
-Eldritch_Blast 8 12 Intellect
-Hand_Of_Guldan 16 24 Intellect
-Shadow_Bite 14 19 Intellect
+Eldritch_Blast 8 12 Intelligence
+Hand_Of_Guldan 16 24 Intelligence
+Shadow_Bite 14 19 Intelligence
 Ranger
 3
 Rapid_Shot 8 10 Dexterity

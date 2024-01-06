@@ -10,6 +10,9 @@ int main()
 
 	dm.initGame();
 	dm.test();
+
+	std::cout << "A";
+
 	return 0;
 }
 

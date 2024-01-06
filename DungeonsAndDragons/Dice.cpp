@@ -4,7 +4,6 @@
 
 int generateRandomNumber()
 {
-    srand(time(NULL));
     return rand();
 }
 

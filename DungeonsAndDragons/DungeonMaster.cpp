@@ -246,6 +246,7 @@ void DungeonMaster::createPlayerCharacter()
 void DungeonMaster::initGame()
 {
 	scenariu_joc.readScenariu();
+	current_room = scenariu_joc.starting_room;
 	createPlayerCharacter();
 }
 
@@ -261,44 +262,19 @@ void DungeonMaster::fightEnemy(Personaj inamic)
 		std::cout << "HP Player:" << hp_player << std::endl;
 		std::cout << "HP Inamic:" << hp_inamic << std::endl;
 
-		std::cout << "Este tura ta: ce fel de abilitate vrei sa folosesti?" << std::endl;
-
-		std::cout << "1.Abilitate specifica rasei." << std::endl;
-		std::cout << "2.Abilitate specifica clasei." << std::endl;
-
-		int tip_abilitate;
-		
-		std::cin >> tip_abilitate;
-
-		try
+		if (player_turn)
 		{
-			if (tip_abilitate != 1 and tip_abilitate != 2)
-			{
-				throw(GenericException("Inputul este invalid."));
-			}
-		}
-		catch (GenericException& exceptie)
-		{
-			exceptie.printException();
-			continue;
-		}
+			std::cout << "Este tura ta: ce fel de abilitate vrei sa folosesti?" << std::endl;
+			std::cout << "1.Abilitate specifica rasei." << std::endl;
+			std::cout << "2.Abilitate specifica clasei." << std::endl;
 
-		Abilitate abilitate_folosita;
+			int tip_abilitate;
 
-		if (tip_abilitate == 1)
-		{	
-			std::cout << "Alege abilitatea pe care doresti sa o folosesti:" << std::endl;
-			for (int i = 0; i < player_joc.getRace().getAbilities().size(); i++)
-			{
-				std::cout << "Abilitatea " << i + 1 << std::endl;
-				std::cout << player_joc.getRace().getAbilities()[i];
-			}
-			int nr_abilitate;
+			std::cin >> tip_abilitate;
 
-			std::cin >> nr_abilitate;
 			try
 			{
-				if (nr_abilitate<1 or nr_abilitate>player_joc.getRace().getAbilities().size())
+				if (tip_abilitate != 1 and tip_abilitate != 2)
 				{
 					throw(GenericException("Inputul este invalid."));
 				}
@@ -308,38 +284,123 @@ void DungeonMaster::fightEnemy(Personaj inamic)
 				exceptie.printException();
 				continue;
 			}
-			abilitate_folosita = player_joc.getRace().getAbilities()[nr_abilitate - 1];
 
+			Abilitate abilitate_folosita;
+
+			if (tip_abilitate == 1)
+			{
+				std::cout << "Alege abilitatea pe care doresti sa o folosesti:" << std::endl;
+				for (int i = 0; i < player_joc.getRace().getAbilities().size(); i++)
+				{
+					std::cout << "Abilitatea " << i + 1 << std::endl;
+					std::cout << player_joc.getRace().getAbilities()[i];
+				}
+				int nr_abilitate;
+
+				std::cin >> nr_abilitate;
+				try
+				{
+					if (nr_abilitate<1 or nr_abilitate>player_joc.getRace().getAbilities().size())
+					{
+						throw(GenericException("Inputul este invalid."));
+					}
+				}
+				catch (GenericException& exceptie)
+				{
+					exceptie.printException();
+					continue;
+				}
+				abilitate_folosita = player_joc.getRace().getAbilities()[nr_abilitate - 1];
+
+			}
+			else
+			{
+				std::cout << "Alege abilitatea pe care doresti sa o folosesti:" << std::endl;
+				for (int i = 0; i < player_joc.getClass().getAbilities().size(); i++)
+				{
+					std::cout << "Abilitatea " << i + 1 << std::endl;
+					std::cout << player_joc.getClass().getAbilities()[i];
+				}
+				int nr_abilitate;
+
+				std::cin >> nr_abilitate;
+				try
+				{
+					if (nr_abilitate<1 or nr_abilitate>player_joc.getClass().getAbilities().size())
+					{
+						throw(GenericException("Inputul este invalid."));
+					}
+				}
+				catch (GenericException& exceptie)
+				{
+					exceptie.printException();
+					continue;
+				}
+				abilitate_folosita = player_joc.getClass().getAbilities()[nr_abilitate - 1];
+			}
+
+			std::cout << "O sa folosesti abilitatea " << abilitate_folosita.getName() << std::endl;
+
+			if (calculateDiceResult(abilitate_folosita.getDifficultyClass(), player_joc.getStatValue(abilitate_folosita.getStatRequired())) == 1)
+			{
+				hp_inamic -= abilitate_folosita.getDamage();
+				std::cout << "Ai cauzat " << abilitate_folosita.getDamage() << " damage inamicului tau!" << std::endl;
+			}
+			else
+			{
+				std::cout << "Abilitatea a esuat!" << std::endl;
+			}
+
+			player_turn = 0;
 		}
 		else
 		{
-			std::cout << "Alege abilitatea pe care doresti sa o folosesti:" << std::endl;
-			for (int i = 0; i < player_joc.getClass().getAbilities().size(); i++)
-			{
-				std::cout << "Abilitatea " << i + 1 << std::endl;
-				std::cout << player_joc.getClass().getAbilities()[i];
-			}
-			int nr_abilitate;
+			std::cout << "Este randul inamicului sa loveasca!" << std::endl;
 
-			std::cin >> nr_abilitate;
-			try
+			int tip_abilitate = rand() % 2;
+			
+			Abilitate abilitate_folosita;
+
+			if (tip_abilitate == 0)
 			{
-				if (nr_abilitate<1 or nr_abilitate>player_joc.getClass().getAbilities().size())
-				{
-					throw(GenericException("Inputul este invalid."));
-				}
+				int nr_abilitate = rand() % inamic.getRace().getAbilities().size();
+				abilitate_folosita = inamic.getRace().getAbilities()[nr_abilitate];
 			}
-			catch (GenericException& exceptie)
+			else
 			{
-				exceptie.printException();
-				continue;
+				int nr_abilitate = rand() % inamic.getClass().getAbilities().size();
+				abilitate_folosita = inamic.getClass().getAbilities()[nr_abilitate];
 			}
-			abilitate_folosita = player_joc.getClass().getAbilities()[nr_abilitate - 1];
+
+			std::cout << "Inamicul o sa foloseasca abilitatea " << abilitate_folosita.getName() << std::endl;
+
+			if (calculateDiceResult(abilitate_folosita.getDifficultyClass(), inamic.getStatValue(abilitate_folosita.getStatRequired())) == 1)
+			{
+				hp_player -= abilitate_folosita.getDamage();
+				std::cout << "Inamicul ti-a cauzat " << abilitate_folosita.getDamage() << " damage!" << std::endl;
+			}
+			else
+			{
+				std::cout << "Abilitatea a esuat!" << std::endl;
+			}
+
+			player_turn = 1;
+
 		}
 
-		std::cout << "O sa folosesti abilitatea " << abilitate_folosita.getName() << std::endl;
+		if (hp_inamic <= 0)
+		{
+			std::cout << "Ai invins inamicul!";
+			//TO DO: STERGE INAMIC DIN CAMERA
+			current_room->removeEnemy(inamic);
+			break;
+		}
+		if(hp_player<=0)
+		{
+			std::cout << "Ai fost invins si ai pierdut jocul!" << std::endl;
+			exit(0);
+		}
 
-		//TODO: Implementare damage
 	}
 
 }
@@ -347,4 +408,9 @@ void DungeonMaster::fightEnemy(Personaj inamic)
 void DungeonMaster::test()
 {
 	fightEnemy(scenariu_joc.inamici_joc[0]);
+}
+
+DungeonMaster::DungeonMaster()
+{
+	srand(time(NULL));
 }

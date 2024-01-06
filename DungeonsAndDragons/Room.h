@@ -13,5 +13,6 @@ public:
 	void addObiect(IObiect* obiectNou);
 	void addInamic(Personaj inamicNou);
 	void setName(std::string name);
+	void removeEnemy(Personaj inamic);
 };
 
