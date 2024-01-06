@@ -10,5 +10,6 @@ public:
 	Clasa() :denumire_clasa("no_class") {}
 	friend std::istream& operator>>(std::istream&, Clasa&);
 	std::string getName();
+	std::vector<Abilitate> getAbilities();
 };
 

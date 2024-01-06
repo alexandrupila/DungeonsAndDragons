@@ -13,12 +13,17 @@ private:
 	std::vector<Room> camere_joc;
 	std::vector<IObiect*> obiecte_joc;
 	std::vector<Personaj> inamici_joc;
+	std::vector<std::string> stats_name;
+	Room* starting_room;
+	friend class DungeonMaster;
 public:
+	void getStats();
 	void readRase();
 	void readClase();
 	void readCamere();
 	void readObiecte();
 	void readInamici();
 	void readScenariu();
+	Room getStartingRoom();
 };
 

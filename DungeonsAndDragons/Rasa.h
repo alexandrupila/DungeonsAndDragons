@@ -12,5 +12,6 @@ public:
 	Rasa() :denumire_rasa("no_race") {}
 	friend std::istream& operator>>(std::istream&, Rasa&);
 	std::string getName();
+	std::vector<Abilitate> getAbilities();
 };
 

@@ -14,5 +14,10 @@ public:
 	Abilitate() :ability_name("NULL"), difficultyClass(0), stat_required("Strength"), damage(0) {}
 	Abilitate(std::string nume, int difClass, std::string stat, int dam) : ability_name(nume), difficultyClass(difClass), stat_required(stat), damage(dam) {}
 	friend std::istream& operator>>(std::istream&, Abilitate&);
+	friend std::ostream& operator<<(std::ostream&, Abilitate&);
+	std::string getName();
+	int getDamage();
+	int getDifficultyClass();
+	std::string getStatRequired();
 };
 

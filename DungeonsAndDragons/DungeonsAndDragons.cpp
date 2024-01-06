@@ -3,16 +3,13 @@
 #include "Rasa.h"
 #include "Clasa.h"
 #include "Scenariu.h"
-
+#include "DungeonMaster.h"
 int main()
 {
-	Scenariu s;
-	s.readRase();
-	s.readClase();
-	s.readObiecte();
-	s.readInamici();
-	s.readCamere();
+	DungeonMaster dm;
 
-	std::cout << "A";
+	dm.initGame();
+	dm.test();
+	return 0;
 }
 

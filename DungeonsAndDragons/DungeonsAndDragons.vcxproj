@@ -141,6 +141,8 @@
   <ItemGroup>
     <ClCompile Include="Abilitate.cpp" />
     <ClCompile Include="Clasa.cpp" />
+    <ClCompile Include="Dice.cpp" />
+    <ClCompile Include="DungeonMaster.cpp" />
     <ClCompile Include="DungeonsAndDragons.cpp" />
     <ClCompile Include="Scenariu.cpp" />
     <ClCompile Include="GenericException.cpp" />
@@ -156,6 +158,8 @@
   <ItemGroup>
     <ClInclude Include="Abilitate.h" />
     <ClInclude Include="Clasa.h" />
+    <ClInclude Include="Dice.h" />
+    <ClInclude Include="DungeonMaster.h" />
     <ClInclude Include="Scenariu.h" />
     <ClInclude Include="GenericException.h" />
     <ClInclude Include="IException.h" />
@@ -173,6 +177,7 @@
     <Text Include="Inamici.txt" />
     <Text Include="Obiecte.txt" />
     <Text Include="Rase.txt" />
+    <Text Include="Stats.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

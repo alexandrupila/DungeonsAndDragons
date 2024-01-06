@@ -16,6 +16,13 @@ public:
 	void setRasa(Rasa rasa_pers);
 	void setClasa(Clasa clasa_pers);
 	void addStat(std::string nume_stat, int val_stat);
+	void setStat(std::string nume_stat, int val_stat);
+	int getHP();
+	int getStatValue(std::string nume_stat);
+	Rasa getRace();
+	Clasa getClass();
 	std::string getNume();
+	Abilitate useRacialAbility(int index_abilitate);
+	Abilitate useClassAbility(int index_abilitate);
 };
 

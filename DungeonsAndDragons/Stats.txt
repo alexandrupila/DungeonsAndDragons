@@ -1,0 +1,4 @@
+Strength
+Dexterity
+Intelligence
+Faith

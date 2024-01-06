@@ -18,3 +18,8 @@ std::string Clasa::getName()
 {
 	return denumire_clasa;
 }
+
+std::vector<Abilitate> Clasa::getAbilities()
+{
+	return abilitati_clasa;
+}

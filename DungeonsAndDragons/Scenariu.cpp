@@ -2,6 +2,19 @@
 #include <sstream>
 #include <string>
 #include <fstream>
+void Scenariu::getStats()
+{
+	std::string stat_name;
+	std::ifstream fisier("Stats.txt");
+	while (!fisier.eof())
+	{
+		fisier >> stat_name;
+		stats_name.push_back(stat_name);
+
+		if (fisier.eof()) break;
+	}
+	
+}
 void Scenariu::readRase()
 {
 	std::ifstream fisier("Rase.txt");
@@ -157,4 +170,20 @@ void Scenariu::readInamici()
 		if (fisier.eof()) break;
 
 	}
+}
+
+void Scenariu::readScenariu()
+{	
+	this->getStats();
+	this->readRase();
+	this->readClase();
+	this->readObiecte();
+	this->readInamici();
+	this->readCamere();
+	starting_room = &(this->camere_joc[0]);
+}
+
+Room Scenariu::getStartingRoom()
+{
+	return *starting_room;
 }

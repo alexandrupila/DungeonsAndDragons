@@ -54,6 +54,12 @@
     <ClCompile Include="Scenariu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Dice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DungeonMaster.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clasa.h">
@@ -92,6 +98,12 @@
     <ClInclude Include="Scenariu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Dice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DungeonMaster.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Rase.txt">
@@ -107,6 +119,9 @@
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="Inamici.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Stats.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

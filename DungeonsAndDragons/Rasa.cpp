@@ -18,3 +18,8 @@ std::string Rasa::getName()
 {
 	return this->denumire_rasa;
 }
+
+std::vector<Abilitate> Rasa::getAbilities()
+{
+	return abiitati_rasa;
+}
