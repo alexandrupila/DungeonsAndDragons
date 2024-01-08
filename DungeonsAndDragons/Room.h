@@ -14,5 +14,10 @@ public:
 	void addInamic(Personaj inamicNou);
 	void setName(std::string name);
 	void removeEnemy(Personaj inamic);
+	void removeObject(IObiect* obiect);
+	std::vector<IObiect*> getObiecte();
+	std::vector<Personaj> getInamici();
+	std::string getRoomName();
+	friend std::ostream& operator<<(std::ostream&, Room&);
 };
 

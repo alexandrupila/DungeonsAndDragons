@@ -13,5 +13,10 @@ std::istream& operator>>(std::istream& in, ObiectNormal& obj)
 
 void ObiectNormal::interactioneaza()
 {
-	std::cout << "nimic";
+	std::cout << this->interactiune << std::endl;
+}
+
+void ObiectNormal::displayObiect()
+{
+	std::cout << "Interactioneaza cu " << this->getNume() << std::endl;
 }

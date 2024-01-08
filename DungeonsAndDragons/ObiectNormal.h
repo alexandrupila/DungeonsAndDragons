@@ -7,6 +7,7 @@ private:
     std::string interactiune;
 public:
     void interactioneaza() override;
+    void displayObiect() override;
     friend std::istream& operator>>(std::istream&, ObiectNormal&);
 };
 

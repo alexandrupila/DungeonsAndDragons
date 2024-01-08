@@ -24,5 +24,6 @@ public:
 	std::string getNume();
 	Abilitate useRacialAbility(int index_abilitate);
 	Abilitate useClassAbility(int index_abilitate);
+	void displayEnemy();
 };
 

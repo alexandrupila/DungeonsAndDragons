@@ -7,11 +7,8 @@
 int main()
 {
 	DungeonMaster dm;
-
-	dm.initGame();
-	dm.test();
-
-	std::cout << "A";
+	
+	dm.playGame();
 
 	return 0;
 }

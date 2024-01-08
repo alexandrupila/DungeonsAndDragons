@@ -13,5 +13,15 @@ std::istream& operator>>(std::istream& in, ObiectSchimbareScena& obj)
 
 void ObiectSchimbareScena::interactioneaza()
 {
-    std::cout << "nimic";
+	std::cout << "Ai folosit <" << this->getNume() << "> si ai ajuns in " << this->nume_camera_noua << std::endl;
+}
+
+void ObiectSchimbareScena::displayObiect()
+{
+	std::cout << "Interactioneaza cu <" << this->getNume() << ">" << std::endl;
+}
+
+std::string ObiectSchimbareScena::getNewRoomName()
+{
+	return nume_camera_noua;
 }

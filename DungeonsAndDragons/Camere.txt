@@ -1,6 +1,9 @@
 Library
-2 cufar usa
+1 usa
 1 Xaylalla
-Secret_chamber
+Secret_Chamber
 2 statuie_grifon portal
 1 Zyraethis
+The_Waking_Isles
+1 cufar
+1 Arthas

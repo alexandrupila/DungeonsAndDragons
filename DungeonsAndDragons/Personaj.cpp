@@ -76,3 +76,9 @@ Abilitate Personaj::useClassAbility(int index_abilitate)
 	std::vector<Abilitate> abilitati = clasa_personaj.getAbilities();
 	return abilitati[index_abilitate];
 }
+
+void Personaj::displayEnemy()
+{
+	std::cout << "Lupta cu " << this->getNume();
+	std::cout << " (" << this->getHP() << " HP)" << std::endl;
+}

@@ -26,3 +26,50 @@ void Room::removeEnemy(Personaj inamic)
 		}
 	}
 }
+
+void Room::removeObject(IObiect* obiect)
+{
+	for (int i = 0; i < obiecte.size(); i++)
+	{
+		if (obiect->getNume() == obiecte[i]->getNume())
+		{
+			obiecte.erase(obiecte.begin() + i);
+			break;
+		}
+	}
+}
+
+std::vector<IObiect*> Room::getObiecte()
+{
+	return obiecte;
+}
+
+std::vector<Personaj> Room::getInamici()
+{
+	return inamici;
+}
+
+std::string Room::getRoomName()
+{
+	return this->room_name;
+}
+
+std::ostream& operator<<(std::ostream& out , Room& r)
+{
+	out << "Camera: " << r.room_name << std::endl;
+	out << "In camera se afla urmatoarele :" << std::endl;
+
+	for (int i = 0; i <r.obiecte.size();i++)
+	{	
+		std::cout << i + 1 << ".:";
+		r.obiecte[i]->displayObiect();
+	}
+
+	for (int i = r.obiecte.size(); i < r.obiecte.size() + r.inamici.size(); i++)
+	{
+		std::cout << i + 1 << ".:";
+		r.inamici[i-r.obiecte.size()].displayEnemy();
+	}
+
+	return out;
+}

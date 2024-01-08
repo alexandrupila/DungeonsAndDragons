@@ -391,7 +391,6 @@ void DungeonMaster::fightEnemy(Personaj inamic)
 		if (hp_inamic <= 0)
 		{
 			std::cout << "Ai invins inamicul!";
-			//TO DO: STERGE INAMIC DIN CAMERA
 			current_room->removeEnemy(inamic);
 			break;
 		}
@@ -405,12 +404,88 @@ void DungeonMaster::fightEnemy(Personaj inamic)
 
 }
 
+void DungeonMaster::interactWithRoom()
+{	
+	while (1)
+	{
+		std::cout << *current_room;
+
+		std::cout << "Introdu actiunea pe care doresti sa o realizez: ";
+
+		int index_actiune;
+		std::cin >> index_actiune;
+		try {
+
+			if (index_actiune<1 or index_actiune>current_room->getInamici().size() + current_room->getObiecte().size())
+			{
+				throw(GenericException("Valoarea introdusa este invalida."));
+			}
+		}
+		catch (IException& exceptie)
+		{
+			exceptie.printException();
+			continue;
+		}
+		
+		if (index_actiune <= current_room->getObiecte().size())
+		{
+			if (calculateDiceResult(current_room->getObiecte()[index_actiune - 1]->getDifficultyClass(), player_joc.getStatValue(current_room->getObiecte()[index_actiune - 1]->getStat()))==1)
+			{	
+
+				ObiectSchimbareScena* obj_schimb_scena = dynamic_cast<ObiectSchimbareScena*>(current_room->getObiecte()[index_actiune - 1]);
+
+				if (obj_schimb_scena == nullptr)
+				{
+					current_room->getObiecte()[index_actiune - 1]->interactioneaza();
+					current_room->removeObject(current_room->getObiecte()[index_actiune - 1]);
+				}
+				else
+				{
+					obj_schimb_scena->interactioneaza();
+					std::string new_room_name = obj_schimb_scena->getNewRoomName();
+					setNewRoom(new_room_name);
+
+				}
+				
+			}
+		}
+		else
+		{
+			fightEnemy(current_room->getInamici()[index_actiune - current_room->getObiecte().size() - 1]);
+		}
+
+	}
+
+}
+
+void DungeonMaster::setNewRoom(std::string newRoomName)
+{
+	for (int i = 0; i < scenariu_joc.camere_joc.size(); i++)
+	{
+		if (scenariu_joc.camere_joc[i].getRoomName() == newRoomName)
+		{
+			current_room = &scenariu_joc.camere_joc[i];
+			break;
+		}
+	}
+}
+
 void DungeonMaster::test()
 {
-	fightEnemy(scenariu_joc.inamici_joc[0]);
+	interactWithRoom();
+}
+
+void DungeonMaster::playGame()
+{
+	initGame();
+	while (1)
+	{
+		interactWithRoom();
+	}
 }
 
 DungeonMaster::DungeonMaster()
 {
 	srand(time(NULL));
+	current_room = nullptr;
 }

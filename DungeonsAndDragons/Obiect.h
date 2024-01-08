@@ -12,6 +12,8 @@ protected:
     std::string stat_required;
 public:
     virtual ~Obiect() {};
+    std::string getStat() { return this->stat_required; }
+    int getDifficultyClass() { return this->difficultyClass; }
     std::string getNume() { return nume_obiect; }
 };
 
