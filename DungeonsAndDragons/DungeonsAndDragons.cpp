@@ -7,7 +7,6 @@
 int main()
 {
 	DungeonMaster dm;
-	
 	dm.playGame();
 
 	return 0;

@@ -59,13 +59,23 @@ void Scenariu::readCamere()
 		{
 			std::string buffer;
 			fisier >> buffer;
-			for (int j = 0; j < this->obiecte_joc.size(); j++)
-			{
-				if (obiecte_joc[j]->getNume() == buffer)
+			try
+			{	
+				int gasit = 0;
+				for (int j = 0; j < this->obiecte_joc.size(); j++)
 				{
-					aux.addObiect(obiecte_joc[j]); 
-					break;
+					if (obiecte_joc[j]->getNume() == buffer)
+					{
+						aux.addObiect(obiecte_joc[j]);
+						gasit = 1;
+						break;
+					}
 				}
+				if (!gasit) throw FatalException("Obiectul nu a fost gasit in lista de obiecte.");
+			}
+			catch (IException& exceptie)
+			{
+				exceptie.printException();
 			}
 		}
 
@@ -75,14 +85,25 @@ void Scenariu::readCamere()
 		{
 			std::string buffer;
 			fisier >> buffer;
-			for (int j = 0; j < this->inamici_joc.size(); j++)
-			{
-				if (inamici_joc[j].getNume() == buffer)
+			try
+			{	
+				int gasit = 0;
+				for (int j = 0; j < this->inamici_joc.size(); j++)
 				{
-					aux.addInamic(inamici_joc[j]);
-					break;
+					if (inamici_joc[j].getNume() == buffer)
+					{
+						aux.addInamic(inamici_joc[j]);
+						gasit = 1;
+						break;
+					}
 				}
+				if (!gasit) throw FatalException("Inamicul nu a fost gasit in lista de inamici.");
 			}
+			catch (IException& exceptie)
+			{
+				exceptie.printException();
+			}
+			
 		}
 		
 		this->camere_joc.push_back(aux);
@@ -137,24 +158,46 @@ void Scenariu::readInamici()
 		temp_pers.setHitPoints(hp_personaj);
 		
 		fisier >> rasa_personaj;
-		for (int i = 0; i < this->rase_joc.size(); i++)
+		try
 		{
-			if (this->rase_joc[i].getName() == rasa_personaj)
+
+			int gasit = 0;
+			for (int i = 0; i < this->rase_joc.size(); i++)
 			{
-				temp_pers.setRasa(rase_joc[i]);
-				break;
+				if (this->rase_joc[i].getName() == rasa_personaj)
+				{
+					temp_pers.setRasa(rase_joc[i]);
+					gasit = 1;
+					break;
+				}
 			}
+			if (!gasit) throw FatalException("Rasa nu exista.");
+		}
+		catch (IException* exceptie)
+		{
+			exceptie->printException();
 		}
 
 
 		fisier >> clasa_personaj;
-		for (int i = 0; i < this->clase_joc.size(); i++)
+		try
 		{
-			if (this->clase_joc[i].getName() == clasa_personaj)
+
+			int gasit = 0;
+			for (int i = 0; i < this->clase_joc.size(); i++)
 			{
-				temp_pers.setClasa(clase_joc[i]);
-				break;
+				if (this->clase_joc[i].getName() == clasa_personaj)
+				{
+					temp_pers.setClasa(clase_joc[i]);
+					gasit = 1;
+					break;
+				}
 			}
+			if(!gasit) throw FatalException("Clasa nu exista.");
+		}
+		catch (IException* exceptie)
+		{
+			exceptie->printException();
 		}
 
 		for (int i = 0; i < NR_OF_STATS; i++)
@@ -164,6 +207,11 @@ void Scenariu::readInamici()
 			fisier >> stat_name >> stat_value;
 			temp_pers.addStat(stat_name, stat_value);
 		}
+
+		std::string trecut_personaj;
+		fisier >> trecut_personaj;
+
+		temp_pers.setTrecut(trecut_personaj);
 
 		this->inamici_joc.push_back(temp_pers);
 

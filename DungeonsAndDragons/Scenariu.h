@@ -5,6 +5,7 @@
 #include "Personaj.h"
 #include "ObiectNormal.h"
 #include "ObiectSchimbareScena.h"
+#include "FatalException.h"
 class Scenariu
 {
 private:

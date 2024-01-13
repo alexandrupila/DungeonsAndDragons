@@ -13,3 +13,13 @@ Ranger
 Rapid_Shot 8 10 Dexterity
 Eviscerate 12 16 Dexterity
 Backstab 18 24 Dexterity
+Death_Knight
+3
+Life_Drain 6 8 Dexterity
+Soul_Reaver 7 10 Strength
+Dreadful_Convergence 20 30 Strength
+Runemaster
+3
+Runeforged_Weapon 7 10 Dexterity
+Runic_Strike 8 11 Intelligence
+Runic_Annihilation 15 23 Intelligence

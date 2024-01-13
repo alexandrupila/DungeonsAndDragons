@@ -1,10 +1,11 @@
 #include "DungeonMaster.h"
 #include "GenericException.h"
 
-int DungeonMaster::calculateDiceResult(int difficultyClass, int statValue)
+int DungeonMaster::calculateDiceResult(int difficultyClass, int statValue,std::string stat)
 {
 	int rezultat_zar = zar.rollDice();
-	std::cout << "Se arunca zarul si se obtine " << rezultat_zar << std::endl;
+	Logger::getInstance().logMessage("Se arunca zarul si se obtine ");
+	Logger::getInstance().logMessage(std::to_string(rezultat_zar) + "\n");
 	
 	switch (statValue)
 	{
@@ -104,11 +105,16 @@ int DungeonMaster::calculateDiceResult(int difficultyClass, int statValue)
 	default:
 		break;
 	}
-	
+
+	if (player_joc.getRace().getBonus().first == stat)
+	{
+		rezultat_zar += player_joc.getRace().getBonus().second;
+	}
+
 	if (rezultat_zar < 0) rezultat_zar = 0;
 	if (rezultat_zar > 30) rezultat_zar = 30;
 
-	std::cout << "Dupa aplicarea modifier ului s-a obtinut " << rezultat_zar << std::endl;
+	Logger::getInstance().logMessage("Dupa aplicarea modifier ului s-a obtinut " + std::to_string(rezultat_zar) + "\n");
 
 	if (rezultat_zar >= difficultyClass)
 	{
@@ -124,45 +130,56 @@ int DungeonMaster::calculateDiceResult(int difficultyClass, int statValue)
 }
 
 void DungeonMaster::createPlayerCharacter()
-{
-	std::cout << "Introdu numele personajului tau:";
+{	
+	Logger::getInstance().logMessage("Introdu numele personajului tau:");
 	std::string nume_personaj_player;
 	std::cin >> nume_personaj_player;
 	player_joc.setName(nume_personaj_player);
 
-	std::cout << "Player character ul are default 100 hp" << std::endl;
-	player_joc.setHitPoints(100);
+	Logger::getInstance().logMessage("Player character ul are default 60 hp");
+	Logger::getInstance().logMessage("\n");
+	player_joc.setHitPoints(60);
 
-	std::cout << "Alege rasa caracterului tau:" << std::endl;
+	Logger::getInstance().logMessage("Alege rasa caracterului tau:");
+	Logger::getInstance().logMessage("\n");
 	for (int i = 0; i < scenariu_joc.rase_joc.size(); i++)
 	{
-		std::cout << i + 1 << ":" << scenariu_joc.rase_joc[i].getName() << std::endl;
+		std::cout << i + 1 << ":";
+		std::cout << scenariu_joc.rase_joc[i];
+		std::cout << "\n";
 	}
 	int nr_rasa;
 	std::cin >> nr_rasa;
 	player_joc.setRasa(scenariu_joc.rase_joc[nr_rasa - 1]);
-
-	std::cout << "Alege clasa caracterului tau:" << std::endl;
+	system("cls");
+	Logger::getInstance().logMessage("Alege clasa caracterului tau:");
+	Logger::getInstance().logMessage("\n");
 	for (int i = 0; i < scenariu_joc.clase_joc.size(); i++)
 	{
-		std::cout << i + 1 << ":" << scenariu_joc.clase_joc[i].getName() << std::endl;
+		std::cout << i + 1 << ":";
+		std::cout << scenariu_joc.clase_joc[i];
+		std::cout << "\n";
 	}
+
 	int nr_clasa;
 	std::cin >> nr_clasa;
 	player_joc.setClasa(scenariu_joc.clase_joc[nr_clasa - 1]);
+
+	system("cls");
 
 	for (int i = 0; i < scenariu_joc.stats_name.size(); i++)
 	{
 		player_joc.addStat(scenariu_joc.stats_name[i], 0);
 	}
 
-	std::cout << "Alege stats-urile caracterului tau(suma totala trebuie sa fie de 50)" << std::endl;
+	Logger::getInstance().logMessage("Alege stats-urile caracterului tau(suma totala trebuie sa fie de 50)");
+	Logger::getInstance().logMessage("\n");
 	int nr_puncte_ramase = 50;
 	while (1)
 	{	
 		if (nr_puncte_ramase == 0)
 		{
-			std::cout << "Ai alocat toate punctele. Doresti sa continui?[Y/N]";
+			Logger::getInstance().logMessage("Ai alocat toate punctele. Doresti sa continui?[Y/N]");
 			char answer;
 			std::cin >> answer;
 
@@ -181,7 +198,8 @@ void DungeonMaster::createPlayerCharacter()
 			if (answer == 'Y') break;
 		}
 
-		std::cout << "Mai ai " << nr_puncte_ramase << "(de) puncte" << std::endl;
+		Logger::getInstance().logMessage("Mai ai " + std::to_string(nr_puncte_ramase) + "(de) puncte");
+		Logger::getInstance().logMessage("\n");
 		for (int i = 0; i < scenariu_joc.stats_name.size(); i++)
 		{
 			std::cout << i + 1 << ":" << scenariu_joc.stats_name[i] << " " << player_joc.getStatValue(scenariu_joc.stats_name[i]) << std::endl;
@@ -206,7 +224,7 @@ void DungeonMaster::createPlayerCharacter()
 
 		int nr_puncte_de_alocat;
 
-		std::cout << "Introdu numarul de puncte pe care doresti sa il aloci:";
+		Logger::getInstance().logMessage("Introdu numarul de puncte pe care doresti sa il aloci:");
 
 		std::cin >> nr_puncte_de_alocat;
 
@@ -237,8 +255,15 @@ void DungeonMaster::createPlayerCharacter()
 		nr_puncte_ramase -= nr_puncte_de_alocat;
 
 		player_joc.setStat(scenariu_joc.stats_name[stats_index - 1],nr_pct_stats_curent);
+		
+		
 
 	}
+
+	Logger::getInstance().logMessage("Introdu trecutul personajului tau: ");
+	std::string trecut;
+	std::cin >> trecut;
+	player_joc.setTrecut(trecut);
 
 
 }
@@ -259,14 +284,19 @@ void DungeonMaster::fightEnemy(Personaj inamic)
 
 	while (1)
 	{
-		std::cout << "HP Player:" << hp_player << std::endl;
-		std::cout << "HP Inamic:" << hp_inamic << std::endl;
+		Logger::getInstance().logMessage("HP Player:" + std::to_string(hp_player));
+		Logger::getInstance().logMessage("\n");
+		Logger::getInstance().logMessage("HP Inamic:" + std::to_string(hp_inamic));
+		Logger::getInstance().logMessage("\n");
 
 		if (player_turn)
 		{
-			std::cout << "Este tura ta: ce fel de abilitate vrei sa folosesti?" << std::endl;
-			std::cout << "1.Abilitate specifica rasei." << std::endl;
-			std::cout << "2.Abilitate specifica clasei." << std::endl;
+			Logger::getInstance().logMessage("Este tura ta: ce fel de abilitate vrei sa folosesti?");
+			Logger::getInstance().logMessage("\n");
+			Logger::getInstance().logMessage("1.Abilitate specifica rasei.");
+			Logger::getInstance().logMessage("\n");
+			Logger::getInstance().logMessage("2.Abilitate specifica clasei.");
+			Logger::getInstance().logMessage("\n");
 
 			int tip_abilitate;
 
@@ -289,7 +319,8 @@ void DungeonMaster::fightEnemy(Personaj inamic)
 
 			if (tip_abilitate == 1)
 			{
-				std::cout << "Alege abilitatea pe care doresti sa o folosesti:" << std::endl;
+				Logger::getInstance().logMessage("Alege abilitatea pe care doresti sa o folosesti:");
+				Logger::getInstance().logMessage("\n");
 				for (int i = 0; i < player_joc.getRace().getAbilities().size(); i++)
 				{
 					std::cout << "Abilitatea " << i + 1 << std::endl;
@@ -315,7 +346,8 @@ void DungeonMaster::fightEnemy(Personaj inamic)
 			}
 			else
 			{
-				std::cout << "Alege abilitatea pe care doresti sa o folosesti:" << std::endl;
+				Logger::getInstance().logMessage("Alege abilitatea pe care doresti sa o folosesti:");
+				Logger::getInstance().logMessage("\n");
 				for (int i = 0; i < player_joc.getClass().getAbilities().size(); i++)
 				{
 					std::cout << "Abilitatea " << i + 1 << std::endl;
@@ -339,23 +371,29 @@ void DungeonMaster::fightEnemy(Personaj inamic)
 				abilitate_folosita = player_joc.getClass().getAbilities()[nr_abilitate - 1];
 			}
 
-			std::cout << "O sa folosesti abilitatea " << abilitate_folosita.getName() << std::endl;
+			Logger::getInstance().logMessage("O sa folosesti abilitatea ");
+			Logger::getInstance().logMessage("\n");
 
-			if (calculateDiceResult(abilitate_folosita.getDifficultyClass(), player_joc.getStatValue(abilitate_folosita.getStatRequired())) == 1)
+			if (calculateDiceResult(abilitate_folosita.getDifficultyClass(), player_joc.getStatValue(abilitate_folosita.getStatRequired()), abilitate_folosita.getStatRequired()) == 1)
 			{
 				hp_inamic -= abilitate_folosita.getDamage();
-				std::cout << "Ai cauzat " << abilitate_folosita.getDamage() << " damage inamicului tau!" << std::endl;
+				Logger::getInstance().logMessage("Ai cauzat " + std::to_string(abilitate_folosita.getDamage()) + " damage inamicului tau!");
+				Logger::getInstance().logMessage("\n");
 			}
 			else
 			{
-				std::cout << "Abilitatea a esuat!" << std::endl;
+				Logger::getInstance().logMessage("Abilitatea a esuat!");
+				Logger::getInstance().logMessage("\n");
 			}
 
 			player_turn = 0;
 		}
 		else
 		{
-			std::cout << "Este randul inamicului sa loveasca!" << std::endl;
+		Logger::getInstance().logMessage("Este randul inamicului sa loveasca!");
+		Logger::getInstance().logMessage("\n");
+
+		Sleep(2000);
 
 			int tip_abilitate = rand() % 2;
 			
@@ -372,16 +410,19 @@ void DungeonMaster::fightEnemy(Personaj inamic)
 				abilitate_folosita = inamic.getClass().getAbilities()[nr_abilitate];
 			}
 
-			std::cout << "Inamicul o sa foloseasca abilitatea " << abilitate_folosita.getName() << std::endl;
+			Logger::getInstance().logMessage("Inamicul o sa foloseasca abilitatea " + abilitate_folosita.getName());
+			Logger::getInstance().logMessage("\n");
 
-			if (calculateDiceResult(abilitate_folosita.getDifficultyClass(), inamic.getStatValue(abilitate_folosita.getStatRequired())) == 1)
+			if (calculateDiceResult(abilitate_folosita.getDifficultyClass(), inamic.getStatValue(abilitate_folosita.getStatRequired()), abilitate_folosita.getStatRequired()) == 1)
 			{
 				hp_player -= abilitate_folosita.getDamage();
-				std::cout << "Inamicul ti-a cauzat " << abilitate_folosita.getDamage() << " damage!" << std::endl;
+				Logger::getInstance().logMessage("Inamicul ti-a cauzat " + std::to_string(abilitate_folosita.getDamage()) + " damage!");
+				Logger::getInstance().logMessage("\n");
 			}
 			else
 			{
-				std::cout << "Abilitatea a esuat!" << std::endl;
+				Logger::getInstance().logMessage("Abilitatea a esuat!");
+				Logger::getInstance().logMessage("\n");
 			}
 
 			player_turn = 1;
@@ -390,13 +431,15 @@ void DungeonMaster::fightEnemy(Personaj inamic)
 
 		if (hp_inamic <= 0)
 		{
-			std::cout << "Ai invins inamicul!";
+			Logger::getInstance().logMessage("Ai invins inamicul!");
+			Logger::getInstance().logMessage("\n");
 			current_room->removeEnemy(inamic);
 			break;
 		}
 		if(hp_player<=0)
 		{
-			std::cout << "Ai fost invins si ai pierdut jocul!" << std::endl;
+			Logger::getInstance().logMessage("Ai fost invins si ai pierdut jocul!");
+			Logger::getInstance().logMessage("\n");
 			exit(0);
 		}
 
@@ -410,7 +453,7 @@ void DungeonMaster::interactWithRoom()
 	{
 		std::cout << *current_room;
 
-		std::cout << "Introdu actiunea pe care doresti sa o realizez: ";
+		Logger::getInstance().logMessage("Introdu actiunea pe care doresti sa o realizez: ");
 
 		int index_actiune;
 		std::cin >> index_actiune;
@@ -429,7 +472,7 @@ void DungeonMaster::interactWithRoom()
 		
 		if (index_actiune <= current_room->getObiecte().size())
 		{
-			if (calculateDiceResult(current_room->getObiecte()[index_actiune - 1]->getDifficultyClass(), player_joc.getStatValue(current_room->getObiecte()[index_actiune - 1]->getStat()))==1)
+			if (calculateDiceResult(current_room->getObiecte()[index_actiune - 1]->getDifficultyClass(), player_joc.getStatValue(current_room->getObiecte()[index_actiune - 1]->getStat()),current_room->getObiecte()[index_actiune-1]->getStat()) == 1)
 			{	
 
 				ObiectSchimbareScena* obj_schimb_scena = dynamic_cast<ObiectSchimbareScena*>(current_room->getObiecte()[index_actiune - 1]);
@@ -444,6 +487,7 @@ void DungeonMaster::interactWithRoom()
 					obj_schimb_scena->interactioneaza();
 					std::string new_room_name = obj_schimb_scena->getNewRoomName();
 					setNewRoom(new_room_name);
+					system("cls");
 
 				}
 				

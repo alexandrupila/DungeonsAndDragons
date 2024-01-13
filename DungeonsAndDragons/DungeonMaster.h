@@ -1,6 +1,8 @@
 #pragma once
 #include "Scenariu.h"
 #include "Dice.h"
+#include <stdlib.h>
+#include <Windows.h>
 class DungeonMaster
 {
 private:
@@ -14,7 +16,7 @@ public:
 	void fightEnemy(Personaj inamic);
 	void interactWithRoom();
 	void setNewRoom(std::string newRoomName);
-	int calculateDiceResult(int difficultyClass, int statValue);
+	int calculateDiceResult(int difficultyClass, int statValue,std::string stat);
 	void test();
 	void playGame();
 	DungeonMaster();

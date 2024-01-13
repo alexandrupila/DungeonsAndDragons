@@ -1,11 +1,23 @@
 Elf
+2 Dexterity
 2
 Shadowstep 5 7 Dexterity
 Elven_Fury 9 10 Dexterity
 Human
+1 Strength
 1
 Rallying_Cry 8 15 Strength
 Nightborne
+2 Intellect
 2
 Arcane_Pulse 12 18 Intelligence
 Chill_Of_Night 10 14 Intelligence
+Draenei
+3 Faith
+1
+Naaru_Gift 4 6 Faith
+Zandalari
+2 Faith
+2
+Voodoo_Strike 5 7 Faith
+Savage_Strike 7 10 Dexterity

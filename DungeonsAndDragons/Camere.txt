@@ -1,9 +1,15 @@
 Library
-1 usa
-1 Xaylalla
+2 usa Harmony_Harp 
+1 Arthas
 Secret_Chamber
-2 statuie_grifon portal
+3 statuie_grifon portal Solar_Flare_Pendant
 1 Zyraethis
 The_Waking_Isles
-1 cufar
+3 cufar Cave_Entrance Temple_Gates
 1 Arthas
+Burial_Chamber
+3 Dragonbone_Hammer Dragon_Claw Tunnel_Trapdoor
+2 Garrek Rokhan
+Temple
+3 Altar_Stone Oracle_Mirror Eternal_Flame
+1 Xaylalla

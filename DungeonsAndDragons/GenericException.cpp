@@ -6,6 +6,6 @@ GenericException::GenericException(std::string aux)
 }
 
 void GenericException::printException()
-{
-	std::cout << this->exceptionText << std::endl;
+{	
+	Logger::getInstance().logMessage(this->exceptionText + "\n");
 }

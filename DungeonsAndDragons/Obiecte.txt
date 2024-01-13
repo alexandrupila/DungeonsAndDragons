@@ -10,3 +10,33 @@ Secret_Chamber
 normal
 statuie_grifon 25 Intelligence
 Statuia grifonului a simtit inteligenta ta si a decis sa iti ofere binecuvantarea sa in drumul greu ce te asteapta.
+normal
+Harmony_Harp 15 Dexterity
+Ai cantat la harpa iar melodia sa ti-a oferit alinare pentru cateva momente.
+normal
+Solar_Flare_Pendant 18 Faith
+Datorita Credintei tale in Lumina, ai reusit sa deblochezi puterea ascunsa a Lantisorului si ai inceput sa il porti.
+normal
+Dragonbone_Hammer 20 Strength
+Datorita puterii tale, ai reusit sa ridici ciocanul din oase de dragon.
+normal
+Dragon_Claw 17 Dexterity
+Reusesti sa iei gheara de dragon si sa o folosesti.
+schimba
+Cave_Entrance 15 Dexterity
+Burial_Chamber
+schimba
+Temple_Gates 10 Intelligence
+Temple
+normal
+Altar_Stone 20 Faith
+Datorita comuniunii tale cu divinitatea, reusesti sa afli datorita pietrei magice faptul ca templul a apartinut unor servitori ai dragonilor.
+schimba
+Oracle_Mirror 14 Faith
+Library
+normal
+Eternal_Flame 12 Intelligence
+Realizezi faptul ca aceasta flacara eterna a fost aprinsa de catre primul dintre dragoni, Zephyrathrax.
+schimba
+Tunnel_Trapdoor 10 Dexterity
+Temple

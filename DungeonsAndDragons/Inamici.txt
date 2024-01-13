@@ -1,24 +1,45 @@
 Xaylalla
-70
+40
 Elf
 Ranger
 Strength 10
 Dexterity 25
 Intelligence 8
 Faith 7
+Aventurier
 Zyraethis
-50
+20
 Nightborne
 Warlock
 Strength 8
 Dexterity 6
 Intelligence 26
 Faith 10
+Exilat
 Arthas
-60
+35
 Human
 Paladin
 Strength 15
 Dexterity 8
 Intelligence 7
 Faith 20
+Rege
+Garrek
+40
+Human
+Runemaster
+Strength 6
+Dexterity 15
+Intelligence 24
+Faith 5
+Scribe
+Rokhan
+40
+Zandalari
+Ranger
+Strength 10
+Dexterity 24
+Intelligence 8 
+Faith 8
+Assassin

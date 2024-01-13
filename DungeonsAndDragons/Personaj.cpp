@@ -37,6 +37,11 @@ void Personaj::setStat(std::string nume_stat, int val_stat)
 	}
 }
 
+void Personaj::setTrecut(std::string trecut)
+{
+	this->background = trecut;
+}
+
 int Personaj::getHP()
 {
 	return hitPoints;
@@ -48,6 +53,7 @@ int Personaj::getStatValue(std::string nume_stat)
 	{
 		if (stats_personaj[i].first == nume_stat) return stats_personaj[i].second;
 	}
+	return 10; //sa nu modifice valoarea zarului
 }
 
 Rasa Personaj::getRace()
@@ -80,5 +86,6 @@ Abilitate Personaj::useClassAbility(int index_abilitate)
 void Personaj::displayEnemy()
 {
 	std::cout << "Lupta cu " << this->getNume();
-	std::cout << " (" << this->getHP() << " HP)" << std::endl;
+	std::cout << " (" << this->getHP() << " HP ";
+	std::cout << this->getRace().getName() << " " << this->getClass().getName() << ")" << std::endl;
 }

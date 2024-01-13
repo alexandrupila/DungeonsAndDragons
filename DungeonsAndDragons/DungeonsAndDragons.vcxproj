@@ -144,6 +144,8 @@
     <ClCompile Include="Dice.cpp" />
     <ClCompile Include="DungeonMaster.cpp" />
     <ClCompile Include="DungeonsAndDragons.cpp" />
+    <ClCompile Include="FatalException.cpp" />
+    <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Scenariu.cpp" />
     <ClCompile Include="GenericException.cpp" />
     <ClCompile Include="IException.cpp" />
@@ -160,6 +162,8 @@
     <ClInclude Include="Clasa.h" />
     <ClInclude Include="Dice.h" />
     <ClInclude Include="DungeonMaster.h" />
+    <ClInclude Include="FatalException.h" />
+    <ClInclude Include="Logger.h" />
     <ClInclude Include="Scenariu.h" />
     <ClInclude Include="GenericException.h" />
     <ClInclude Include="IException.h" />

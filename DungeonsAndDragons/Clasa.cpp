@@ -14,6 +14,17 @@ std::istream& operator>>(std::istream& in, Clasa& cl)
 	return in;
 }
 
+std::ostream& operator<<(std::ostream& out, Clasa& c)
+{
+	out << c.denumire_clasa << std::endl;
+	out << "Abilitati:" << std::endl;
+	for (int i = 0; i < c.abilitati_clasa.size(); i++)
+	{
+		out << c.abilitati_clasa[i];
+	}
+	return out;
+}
+
 std::string Clasa::getName()
 {
 	return denumire_clasa;
