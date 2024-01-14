@@ -1,6 +1,7 @@
 #include "Logger.h"
 
 Logger* Logger::instance = nullptr;
+HANDLE Logger::color = GetStdHandle(STD_OUTPUT_HANDLE);
 
 Logger& Logger::getInstance()
 {
@@ -21,6 +22,21 @@ void Logger::destroyInstance()
 }
 
 void Logger::logMessage(std::string message)
-{
+{   
+    SetConsoleTextAttribute(color, 7);
     std::cout << message;
+}
+
+void Logger::logRedMessage(std::string message)
+{
+    SetConsoleTextAttribute(color, 12);
+    std::cout << message;
+    SetConsoleTextAttribute(color, 7);
+}
+
+void Logger::logGreenMessage(std::string message)
+{
+    SetConsoleTextAttribute(color, 10);
+    std::cout << message;
+    SetConsoleTextAttribute(color, 7);
 }

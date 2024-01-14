@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32106.194
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DungeonsAndDragons", "DungeonsAndDragons\DungeonsAndDragons.vcxproj", "{28B5AC2D-A501-4162-8406-4F4AEE21927C}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DnDSetup", "DnDSetup\DnDSetup.vdproj", "{1BAD5117-F8D6-4FD5-BAF6-D7263484A24F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,11 @@ Global
 		{28B5AC2D-A501-4162-8406-4F4AEE21927C}.Release|x64.Build.0 = Release|x64
 		{28B5AC2D-A501-4162-8406-4F4AEE21927C}.Release|x86.ActiveCfg = Release|Win32
 		{28B5AC2D-A501-4162-8406-4F4AEE21927C}.Release|x86.Build.0 = Release|Win32
+		{1BAD5117-F8D6-4FD5-BAF6-D7263484A24F}.Debug|x64.ActiveCfg = Debug
+		{1BAD5117-F8D6-4FD5-BAF6-D7263484A24F}.Debug|x64.Build.0 = Debug
+		{1BAD5117-F8D6-4FD5-BAF6-D7263484A24F}.Debug|x86.ActiveCfg = Debug
+		{1BAD5117-F8D6-4FD5-BAF6-D7263484A24F}.Release|x64.ActiveCfg = Release
+		{1BAD5117-F8D6-4FD5-BAF6-D7263484A24F}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

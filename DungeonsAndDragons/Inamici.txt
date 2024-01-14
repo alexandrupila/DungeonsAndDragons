@@ -17,7 +17,7 @@ Intelligence 26
 Faith 10
 Exilat
 Arthas
-35
+30
 Human
 Paladin
 Strength 15

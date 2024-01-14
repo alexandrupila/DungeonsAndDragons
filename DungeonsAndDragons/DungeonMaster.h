@@ -3,6 +3,7 @@
 #include "Dice.h"
 #include <stdlib.h>
 #include <Windows.h>
+#include <fstream>
 class DungeonMaster
 {
 private:
@@ -11,6 +12,7 @@ private:
 	Dice zar;
 	Room* current_room;
 public:
+	void displayStartMessage();
 	void createPlayerCharacter();
 	void initGame();
 	void fightEnemy(Personaj inamic);

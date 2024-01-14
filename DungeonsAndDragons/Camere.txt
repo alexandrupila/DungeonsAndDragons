@@ -1,6 +1,6 @@
 Library
 2 usa Harmony_Harp 
-1 Arthas
+0 
 Secret_Chamber
 3 statuie_grifon portal Solar_Flare_Pendant
 1 Zyraethis

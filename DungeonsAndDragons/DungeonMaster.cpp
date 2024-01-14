@@ -129,6 +129,19 @@ int DungeonMaster::calculateDiceResult(int difficultyClass, int statValue,std::s
 
 }
 
+void DungeonMaster::displayStartMessage()
+{
+	std::ifstream title_file("title.txt");
+	std::string output_message;
+	if (title_file)
+	{
+		std::ostringstream ss;
+		ss << title_file.rdbuf();
+		output_message = ss.str();
+	}
+	Logger::getInstance().logMessage(output_message);
+}
+
 void DungeonMaster::createPlayerCharacter()
 {	
 	Logger::getInstance().logMessage("Introdu numele personajului tau:");
@@ -148,8 +161,26 @@ void DungeonMaster::createPlayerCharacter()
 		std::cout << scenariu_joc.rase_joc[i];
 		std::cout << "\n";
 	}
-	int nr_rasa;
-	std::cin >> nr_rasa;
+	int nr_rasa=0;
+	
+	while (nr_rasa<1 or nr_rasa>scenariu_joc.rase_joc.size())
+	{	
+		std::cin.clear();
+		std::cin.ignore(INT_MAX,'\n');
+
+		std::cin >> nr_rasa;
+		try
+		{
+			if (nr_rasa<1 or nr_rasa>scenariu_joc.rase_joc.size())
+			{
+				throw new GenericException("Valoarea introdusa este invalida");
+			}
+		}
+		catch (IException* exceptie)
+		{
+			exceptie->printException();
+		}
+	}
 	player_joc.setRasa(scenariu_joc.rase_joc[nr_rasa - 1]);
 	system("cls");
 	Logger::getInstance().logMessage("Alege clasa caracterului tau:");
@@ -161,8 +192,27 @@ void DungeonMaster::createPlayerCharacter()
 		std::cout << "\n";
 	}
 
-	int nr_clasa;
-	std::cin >> nr_clasa;
+	int nr_clasa=0;
+
+	while (nr_clasa<1 or nr_clasa>scenariu_joc.clase_joc.size())
+	{	
+		std::cin.clear();
+		std::cin.ignore(INT_MAX, '\n');
+
+		std::cin >> nr_clasa;
+		try
+		{
+			if (nr_clasa<1 or nr_clasa>scenariu_joc.clase_joc.size())
+			{
+				throw new GenericException("Valoarea introdusa este invalida");
+			}
+		}
+		catch (IException* exceptie)
+		{
+			exceptie->printException();
+		}
+	}
+
 	player_joc.setClasa(scenariu_joc.clase_joc[nr_clasa - 1]);
 
 	system("cls");
@@ -181,17 +231,19 @@ void DungeonMaster::createPlayerCharacter()
 		{
 			Logger::getInstance().logMessage("Ai alocat toate punctele. Doresti sa continui?[Y/N]");
 			char answer;
+			std::cin.clear();
+			std::cin.ignore(INT_MAX, '\n');
 			std::cin >> answer;
 
 			try {
 				if (answer != 'Y' and answer != 'N')
 				{
-					throw GenericException("Raspunusul nu are sens.");
+					throw new GenericException("Raspunusul nu are sens.");
 				}
 			}
-			catch (GenericException& exceptie)
+			catch (IException* exceptie)
 			{
-				exceptie.printException();
+				exceptie->printException();
 				continue;
 			}
 
@@ -206,6 +258,8 @@ void DungeonMaster::createPlayerCharacter()
 		}
 
 		int stats_index;
+		std::cin.clear();
+		std::cin.ignore(INT_MAX, '\n');
 
 		std::cin >> stats_index;
 
@@ -213,12 +267,12 @@ void DungeonMaster::createPlayerCharacter()
 		{
 			if (stats_index<1 or stats_index>scenariu_joc.stats_name.size() + 1)
 			{
-				throw GenericException("Index-ul ales este invalid.");
+				throw new GenericException("Index-ul ales este invalid.");
 			}
 		}
-		catch (GenericException& exceptie)
+		catch (IException* exceptie)
 		{
-			exceptie.printException();
+			exceptie->printException();
 			continue;
 		}
 
@@ -226,27 +280,29 @@ void DungeonMaster::createPlayerCharacter()
 
 		Logger::getInstance().logMessage("Introdu numarul de puncte pe care doresti sa il aloci:");
 
+		std::cin.clear();
+		std::cin.ignore(INT_MAX, '\n');
 		std::cin >> nr_puncte_de_alocat;
 
 		try
 		{
 			if (nr_puncte_de_alocat > nr_puncte_ramase)
 			{
-				throw GenericException("Nu mai ai destule puncte de alocat");
+				throw new GenericException("Nu mai ai destule puncte de alocat");
 			}
 			if (nr_puncte_de_alocat < 0)
 			{
 				int nr_pct_stats_curent = player_joc.getStatValue(scenariu_joc.stats_name[stats_index - 1]);
 				if (nr_pct_stats_curent + nr_puncte_de_alocat < 0)
 				{
-					throw GenericException("Ai incercat sa aloci puncte in minus!");
+					throw new GenericException("Ai incercat sa aloci puncte in minus!");
 				}
 			}
 		}
 
-		catch (GenericException& exceptie)
+		catch (IException* exceptie)
 		{
-			exceptie.printException();
+			exceptie->printException();
 			continue;
 		}
 
@@ -269,7 +325,8 @@ void DungeonMaster::createPlayerCharacter()
 }
 
 void DungeonMaster::initGame()
-{
+{	
+	displayStartMessage();
 	scenariu_joc.readScenariu();
 	current_room = scenariu_joc.starting_room;
 	createPlayerCharacter();
@@ -299,19 +356,20 @@ void DungeonMaster::fightEnemy(Personaj inamic)
 			Logger::getInstance().logMessage("\n");
 
 			int tip_abilitate;
-
+			std::cin.clear();
+			std::cin.ignore(INT_MAX, '\n');
 			std::cin >> tip_abilitate;
 
 			try
 			{
 				if (tip_abilitate != 1 and tip_abilitate != 2)
 				{
-					throw(GenericException("Inputul este invalid."));
+					throw new GenericException("Inputul este invalid.");
 				}
 			}
-			catch (GenericException& exceptie)
+			catch (IException* exceptie)
 			{
-				exceptie.printException();
+				exceptie->printException();
 				continue;
 			}
 
@@ -327,18 +385,19 @@ void DungeonMaster::fightEnemy(Personaj inamic)
 					std::cout << player_joc.getRace().getAbilities()[i];
 				}
 				int nr_abilitate;
-
+				std::cin.clear();
+				std::cin.ignore(INT_MAX, '\n');
 				std::cin >> nr_abilitate;
 				try
 				{
 					if (nr_abilitate<1 or nr_abilitate>player_joc.getRace().getAbilities().size())
 					{
-						throw(GenericException("Inputul este invalid."));
+						throw new GenericException("Inputul este invalid.");
 					}
 				}
-				catch (GenericException& exceptie)
+				catch (IException* exceptie)
 				{
-					exceptie.printException();
+					exceptie->printException();
 					continue;
 				}
 				abilitate_folosita = player_joc.getRace().getAbilities()[nr_abilitate - 1];
@@ -354,18 +413,19 @@ void DungeonMaster::fightEnemy(Personaj inamic)
 					std::cout << player_joc.getClass().getAbilities()[i];
 				}
 				int nr_abilitate;
-
+				std::cin.clear();
+				std::cin.ignore(INT_MAX, '\n');
 				std::cin >> nr_abilitate;
 				try
 				{
 					if (nr_abilitate<1 or nr_abilitate>player_joc.getClass().getAbilities().size())
 					{
-						throw(GenericException("Inputul este invalid."));
+						throw new GenericException("Inputul este invalid.");
 					}
 				}
-				catch (GenericException& exceptie)
+				catch (IException* exceptie)
 				{
-					exceptie.printException();
+					exceptie->printException();
 					continue;
 				}
 				abilitate_folosita = player_joc.getClass().getAbilities()[nr_abilitate - 1];
@@ -377,7 +437,7 @@ void DungeonMaster::fightEnemy(Personaj inamic)
 			if (calculateDiceResult(abilitate_folosita.getDifficultyClass(), player_joc.getStatValue(abilitate_folosita.getStatRequired()), abilitate_folosita.getStatRequired()) == 1)
 			{
 				hp_inamic -= abilitate_folosita.getDamage();
-				Logger::getInstance().logMessage("Ai cauzat " + std::to_string(abilitate_folosita.getDamage()) + " damage inamicului tau!");
+				Logger::getInstance().logGreenMessage("Ai cauzat " + std::to_string(abilitate_folosita.getDamage()) + " damage inamicului tau!");
 				Logger::getInstance().logMessage("\n");
 			}
 			else
@@ -385,7 +445,7 @@ void DungeonMaster::fightEnemy(Personaj inamic)
 				Logger::getInstance().logMessage("Abilitatea a esuat!");
 				Logger::getInstance().logMessage("\n");
 			}
-
+			Logger::getInstance().logMessage("\n");
 			player_turn = 0;
 		}
 		else
@@ -416,7 +476,7 @@ void DungeonMaster::fightEnemy(Personaj inamic)
 			if (calculateDiceResult(abilitate_folosita.getDifficultyClass(), inamic.getStatValue(abilitate_folosita.getStatRequired()), abilitate_folosita.getStatRequired()) == 1)
 			{
 				hp_player -= abilitate_folosita.getDamage();
-				Logger::getInstance().logMessage("Inamicul ti-a cauzat " + std::to_string(abilitate_folosita.getDamage()) + " damage!");
+				Logger::getInstance().logRedMessage("Inamicul ti-a cauzat " + std::to_string(abilitate_folosita.getDamage()) + " damage!");
 				Logger::getInstance().logMessage("\n");
 			}
 			else
@@ -424,21 +484,21 @@ void DungeonMaster::fightEnemy(Personaj inamic)
 				Logger::getInstance().logMessage("Abilitatea a esuat!");
 				Logger::getInstance().logMessage("\n");
 			}
-
+			Logger::getInstance().logMessage("\n");
 			player_turn = 1;
 
 		}
 
 		if (hp_inamic <= 0)
 		{
-			Logger::getInstance().logMessage("Ai invins inamicul!");
+			Logger::getInstance().logGreenMessage("Ai invins inamicul!");
 			Logger::getInstance().logMessage("\n");
 			current_room->removeEnemy(inamic);
 			break;
 		}
 		if(hp_player<=0)
 		{
-			Logger::getInstance().logMessage("Ai fost invins si ai pierdut jocul!");
+			Logger::getInstance().logRedMessage("Ai fost invins si ai pierdut jocul!");
 			Logger::getInstance().logMessage("\n");
 			exit(0);
 		}
@@ -456,17 +516,19 @@ void DungeonMaster::interactWithRoom()
 		Logger::getInstance().logMessage("Introdu actiunea pe care doresti sa o realizez: ");
 
 		int index_actiune;
+		std::cin.clear();
+		std::cin.ignore(INT_MAX, '\n');
 		std::cin >> index_actiune;
 		try {
 
 			if (index_actiune<1 or index_actiune>current_room->getInamici().size() + current_room->getObiecte().size())
 			{
-				throw(GenericException("Valoarea introdusa este invalida."));
+				throw new GenericException("Valoarea introdusa este invalida.");
 			}
 		}
-		catch (IException& exceptie)
+		catch (IException* exceptie)
 		{
-			exceptie.printException();
+			exceptie->printException();
 			continue;
 		}
 		
@@ -491,6 +553,11 @@ void DungeonMaster::interactWithRoom()
 
 				}
 				
+			}
+			else
+			{
+				Sleep(2000);
+				system("cls");
 			}
 		}
 		else

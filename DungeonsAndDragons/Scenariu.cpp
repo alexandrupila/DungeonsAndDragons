@@ -6,6 +6,16 @@ void Scenariu::getStats()
 {
 	std::string stat_name;
 	std::ifstream fisier("Stats.txt");
+
+	try
+	{
+		if (fisier.fail()) throw new FatalException("Fisierul pentru stats (Stats.txt) nu exista");
+	}
+	catch(IException* exceptie)
+	{
+		exceptie->printException();
+	}
+
 	while (!fisier.eof())
 	{
 		fisier >> stat_name;
@@ -19,6 +29,15 @@ void Scenariu::readRase()
 {
 	std::ifstream fisier("Rase.txt");
 
+	try
+	{
+		if (fisier.fail()) throw new FatalException("Fisierul pentru rase (Rase.txt) nu exista");
+	}
+	catch (IException* exceptie)
+	{
+		exceptie->printException();
+	}
+
 	while (!fisier.eof())
 	{
 		Rasa aux;
@@ -27,10 +46,18 @@ void Scenariu::readRase()
 		if (fisier.eof()) break;
 	}
 }
-
 void Scenariu::readClase()
 {
 	std::ifstream fisier("Clase.txt");
+
+	try
+	{
+		if (fisier.fail()) throw new FatalException("Fisierul pentru clase (Clase.txt) nu exista");
+	}
+	catch (IException* exceptie)
+	{
+		exceptie->printException();
+	}
 
 	while (!fisier.eof())
 	{
@@ -40,10 +67,18 @@ void Scenariu::readClase()
 		if (fisier.eof()) break;
 	}
 }
-
 void Scenariu::readCamere()
 {
 	std::ifstream fisier("Camere.txt");
+
+	try
+	{
+		if (fisier.fail()) throw new FatalException("Fisierul pentru camere (Camere.txt) nu exista");
+	}
+	catch (IException* exceptie)
+	{
+		exceptie->printException();
+	}
 
 	while (!fisier.eof())
 	{
@@ -71,11 +106,11 @@ void Scenariu::readCamere()
 						break;
 					}
 				}
-				if (!gasit) throw FatalException("Obiectul nu a fost gasit in lista de obiecte.");
+				if (!gasit) throw new FatalException("Obiectul nu a fost gasit in lista de obiecte.");
 			}
-			catch (IException& exceptie)
+			catch (IException* exceptie)
 			{
-				exceptie.printException();
+				exceptie->printException();
 			}
 		}
 
@@ -97,11 +132,11 @@ void Scenariu::readCamere()
 						break;
 					}
 				}
-				if (!gasit) throw FatalException("Inamicul nu a fost gasit in lista de inamici.");
+				if (!gasit) throw new FatalException("Inamicul nu a fost gasit in lista de inamici.");
 			}
-			catch (IException& exceptie)
+			catch (IException* exceptie)
 			{
-				exceptie.printException();
+				exceptie->printException();
 			}
 			
 		}
@@ -112,10 +147,17 @@ void Scenariu::readCamere()
 
 	}
 }
-
 void Scenariu::readObiecte()
 {
 	std::ifstream fisier("Obiecte.txt");
+	try
+	{
+		if (fisier.fail()) throw new FatalException("Fisierul pentru obiecte (Obiecte.txt) nu exista");
+	}
+	catch (IException* exceptie)
+	{
+		exceptie->printException();
+	}
 	while (!fisier.eof())
 	{
 		std::string buffer;
@@ -137,10 +179,17 @@ void Scenariu::readObiecte()
 		}
 	}
 }
-
 void Scenariu::readInamici()
 {
 	std::ifstream fisier("Inamici.txt");
+	try
+	{
+		if (fisier.fail()) throw new FatalException("Fisierul pentru inamici (Inamici.txt) nu exista");
+	}
+	catch (IException* exceptie)
+	{
+		exceptie->printException();
+	}
 
 	while (!fisier.eof())
 	{	
@@ -171,7 +220,7 @@ void Scenariu::readInamici()
 					break;
 				}
 			}
-			if (!gasit) throw FatalException("Rasa nu exista.");
+			if (!gasit) throw new FatalException("Rasa nu exista.");
 		}
 		catch (IException* exceptie)
 		{
@@ -193,7 +242,7 @@ void Scenariu::readInamici()
 					break;
 				}
 			}
-			if(!gasit) throw FatalException("Clasa nu exista.");
+			if(!gasit) throw new FatalException("Clasa nu exista.");
 		}
 		catch (IException* exceptie)
 		{
