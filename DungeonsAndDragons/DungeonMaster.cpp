@@ -1,6 +1,8 @@
 #include "DungeonMaster.h"
 #include "GenericException.h"
 
+DungeonMaster* DungeonMaster::instance = nullptr;
+
 int DungeonMaster::calculateDiceResult(int difficultyClass, int statValue,std::string stat)
 {
 	int rezultat_zar = zar.rollDice();
@@ -225,8 +227,9 @@ void DungeonMaster::createPlayerCharacter()
 	Logger::getInstance().logMessage("Alege stats-urile caracterului tau(suma totala trebuie sa fie de 50)");
 	Logger::getInstance().logMessage("\n");
 	int nr_puncte_ramase = 50;
+	Sleep(3000);
 	while (1)
-	{	
+	{
 		if (nr_puncte_ramase == 0)
 		{
 			Logger::getInstance().logMessage("Ai alocat toate punctele. Doresti sa continui?[Y/N]");
@@ -247,7 +250,11 @@ void DungeonMaster::createPlayerCharacter()
 				continue;
 			}
 
-			if (answer == 'Y') break;
+			if (answer == 'Y')
+			{	
+				system("cls");
+				break;
+			}
 		}
 
 		Logger::getInstance().logMessage("Mai ai " + std::to_string(nr_puncte_ramase) + "(de) puncte");
@@ -312,7 +319,7 @@ void DungeonMaster::createPlayerCharacter()
 
 		player_joc.setStat(scenariu_joc.stats_name[stats_index - 1],nr_pct_stats_curent);
 		
-		
+		system("cls");
 
 	}
 
@@ -320,6 +327,8 @@ void DungeonMaster::createPlayerCharacter()
 	std::string trecut;
 	std::cin >> trecut;
 	player_joc.setTrecut(trecut);
+
+	system("cls");
 
 
 }
@@ -478,13 +487,17 @@ void DungeonMaster::fightEnemy(Personaj inamic)
 				hp_player -= abilitate_folosita.getDamage();
 				Logger::getInstance().logRedMessage("Inamicul ti-a cauzat " + std::to_string(abilitate_folosita.getDamage()) + " damage!");
 				Logger::getInstance().logMessage("\n");
+				Sleep(2000);
+				system("cls");
 			}
 			else
 			{
 				Logger::getInstance().logMessage("Abilitatea a esuat!");
 				Logger::getInstance().logMessage("\n");
+				Sleep(2000);
+				system("cls");
 			}
-			Logger::getInstance().logMessage("\n");
+			//Logger::getInstance().logMessage("\n");
 			player_turn = 1;
 
 		}
@@ -494,6 +507,8 @@ void DungeonMaster::fightEnemy(Personaj inamic)
 			Logger::getInstance().logGreenMessage("Ai invins inamicul!");
 			Logger::getInstance().logMessage("\n");
 			current_room->removeEnemy(inamic);
+			Sleep(2000);
+			system("cls");
 			break;
 		}
 		if(hp_player<=0)
@@ -549,6 +564,7 @@ void DungeonMaster::interactWithRoom()
 					obj_schimb_scena->interactioneaza();
 					std::string new_room_name = obj_schimb_scena->getNewRoomName();
 					setNewRoom(new_room_name);
+					Sleep(2000);
 					system("cls");
 
 				}
@@ -592,6 +608,24 @@ void DungeonMaster::playGame()
 	while (1)
 	{
 		interactWithRoom();
+	}
+}
+
+DungeonMaster& DungeonMaster::getInstance()
+{
+	if (DungeonMaster::instance == nullptr)
+	{
+		DungeonMaster::instance = new DungeonMaster();
+	}
+	return *(DungeonMaster::instance);
+}
+
+void DungeonMaster::destroyInstance()
+{
+	if (DungeonMaster::instance)
+	{
+		delete DungeonMaster::instance;
+		DungeonMaster::instance = nullptr;
 	}
 }
 

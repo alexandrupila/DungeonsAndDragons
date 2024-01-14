@@ -1,11 +1,11 @@
 schimba
-portal 15 Intelligence
+portal 10 Intelligence
 The_Waking_Isles
 normal
 cufar 18 Strength 
 Ai spart cufarul iar in interiorul acestuia se afla o sabie magica.
 schimba
-usa 12 Dexterity
+usa 10 Dexterity
 Secret_Chamber
 normal
 statuie_grifon 25 Intelligence
@@ -23,7 +23,7 @@ normal
 Dragon_Claw 17 Dexterity
 Reusesti sa iei gheara de dragon si sa o folosesti.
 schimba
-Cave_Entrance 15 Dexterity
+Cave_Entrance 10 Dexterity
 Burial_Chamber
 schimba
 Temple_Gates 10 Intelligence
@@ -32,7 +32,7 @@ normal
 Altar_Stone 20 Faith
 Datorita comuniunii tale cu divinitatea, reusesti sa afli datorita pietrei magice faptul ca templul a apartinut unor servitori ai dragonilor.
 schimba
-Oracle_Mirror 14 Faith
+Oracle_Mirror 10 Faith
 Library
 normal
 Eternal_Flame 12 Intelligence

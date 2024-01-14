@@ -11,6 +11,8 @@ private:
 	Scenariu scenariu_joc;
 	Dice zar;
 	Room* current_room;
+	static DungeonMaster* instance;
+	DungeonMaster();
 public:
 	void displayStartMessage();
 	void createPlayerCharacter();
@@ -21,6 +23,7 @@ public:
 	int calculateDiceResult(int difficultyClass, int statValue,std::string stat);
 	void test();
 	void playGame();
-	DungeonMaster();
+	static DungeonMaster& getInstance();
+	static void destroyInstance();
 };
 

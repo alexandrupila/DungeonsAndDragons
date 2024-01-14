@@ -40,3 +40,10 @@ void Logger::logGreenMessage(std::string message)
     std::cout << message;
     SetConsoleTextAttribute(color, 7);
 }
+
+void Logger::logBlueMessage(std::string message)
+{
+    SetConsoleTextAttribute(color, 1);
+    std::cout << message;
+    SetConsoleTextAttribute(color, 7);
+}

@@ -6,7 +6,7 @@
 #include "DungeonMaster.h"
 int main()
 {
-	DungeonMaster dm;
+	DungeonMaster dm = DungeonMaster::getInstance();
 	dm.playGame();
 
 	return 0;
