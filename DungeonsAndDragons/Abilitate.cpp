@@ -7,10 +7,15 @@ std::istream& operator>>(std::istream& in, Abilitate& ability)
 }
 
 std::ostream& operator<<(std::ostream& out , Abilitate& ab)
-{
+{	
+	HANDLE color = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(color, 1);
 	out << ab.ability_name << "\n";
+	SetConsoleTextAttribute(color, 12);
 	out << ab.damage << " damage" << "\n";
+	SetConsoleTextAttribute(color, 14);
 	out << ab.difficultyClass << " " << ab.stat_required << "\n";
+	SetConsoleTextAttribute(color, 7);
 	return out;
 }
 
